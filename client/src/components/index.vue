@@ -21,7 +21,7 @@
 		<input type="button" value="立即报名"  @click="addUser"/>
 	  </P>
 	</div>
-
+	<div id="recv"></div>
 	<h3>最新人员名单</h3>
 	<table>
 	  	<tr>	  		
@@ -41,7 +41,7 @@ import {hex_md5} from '../util/md5'
 import httpHelper from "../util/httpHelper"
 import {getTelPhone} from '../util/cacheManger'
 import UserModel from '../model/userModel'
-
+let webSocket = new WebSocket('ws://localhost:8080/');
 let userTelephone = getTelPhone();
 export default{
 	data(){
@@ -67,6 +67,10 @@ export default{
 			_self.message='';
 		},
 		addUser(){
+			webSocket.onmessage = function (e) { 
+					console.log('webSocket close',e); 
+					document.getElementById('recv').innerHtml(JSON.parse(e.data));
+			};
 			let _self = this;				
 			let params = {name:_self.name,sex:_self.sex,phone:_self.phone,address:_self.address,message:_self.message};
 			if(_self.name && _self.sex){

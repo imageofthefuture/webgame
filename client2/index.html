@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>client2</title>
+</head>
+
+<body>
+    <button id="lianxi" type="submit" onclick="dianji()">测试 websocket</button>
+</body>
+<script src="https://cdn.bootcss.com/socket.io/2.1.0/socket.io.dev.js"></script>
+<script>
+    const socket = io("ws://127.0.0.1:3000");
+
+    const obj = {
+        username: "client2",
+        content: "nnnnnn"
+    };
+    socket.on("message", function (obj) {
+        document.getElementById("lianxi").innerHTML = obj.username;
+    });
+
+    function dianji() {
+        socket.emit("message", obj);
+    }
+</script>
+
+</html>

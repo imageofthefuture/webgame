@@ -8,7 +8,7 @@
       <input type="button" value="发送验证码" @click="getCode">
     </div>
     <button id="login-btn" @click="loginUser">登 录</button>
-    <button id="lianxi" @click="lianxi">练 习</button>
+    <button id="lianxi" @click="lianxi" title='点击这个按钮 会触发websocket到服务器，并通知到各个客户端'>测试websocket</button>
   </div>
 </template>
 
@@ -18,7 +18,7 @@ import httpHelper from "../util/httpHelper";
 import { setTelPhone } from "../util/cacheManger";
 import io from "socket.io-client";
 const socket = io.connect("ws://127.0.0.1:3000");
-const obj = { username: "aaa", content: "nnnnnn"};
+const obj = { username: "client", content: "nnnnnn"};
 export default {
   data() {
     return {
